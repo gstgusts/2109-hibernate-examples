@@ -19,13 +19,13 @@ public class LibraryRepository {
         }
     }
 
-    public Integer addBook(Book book) {
+    public Integer add(Object obj) {
         var session = factory.openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            var id = (Integer) session.save(book);
+            var id = (Integer) session.save(obj);
             tx.commit();
             return id;
         } catch (HibernateException exception) {
@@ -38,5 +38,23 @@ public class LibraryRepository {
         }
 
         return null;
+    }
+
+    public void update(Object obj) {
+        var session = factory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            session.update(obj);
+            tx.commit();
+        } catch (HibernateException exception) {
+            if(tx != null) {
+                tx.rollback();
+            }
+            System.err.println(exception);
+        } finally {
+            session.close();
+        }
     }
 }

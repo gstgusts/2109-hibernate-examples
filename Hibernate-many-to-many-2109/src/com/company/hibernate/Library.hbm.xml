@@ -18,7 +18,7 @@
             <key column = "book_id"/>
             <many-to-many column = "author_id" class="com.company.Author"/>
         </set>
-
+        
         <property name = "title" column = "title" type = "string"/>
         <property name = "isbnCode" column = "isbn_code" type = "string"/>
 
