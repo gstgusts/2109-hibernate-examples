@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "com.company.Car" table = "car">
+
+        <meta attribute = "class-description">
+            This class contains the car detail.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "number" column = "number" type = "string"/>
+        <property name = "vinNumber" column = "vin_number" type = "string"/>
+        <many-to-one name = "owner" column = "owner_id"
+                     class="com.company.Owner" not-null="false" lazy="false" cascade="save-update"/>
+
+    </class>
+
+    <class name = "com.company.Owner" table = "owner">
+
+        <meta attribute = "class-description">
+            This class contains the owner detail.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "name" column = "name" type = "string"/>
+        <property name = "surname" column = "surname" type = "string"/>
+
+    </class>
+
+
+</hibernate-mapping>
