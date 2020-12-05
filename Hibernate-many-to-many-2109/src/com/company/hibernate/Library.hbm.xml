@@ -1,0 +1,43 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "com.company.Book" table = "book">
+
+        <meta attribute = "class-description">
+            This class contains the book detail.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <set name = "authors" cascade="all" table="author_book" lazy="false">
+            <key column = "book_id"/>
+            <many-to-many column = "author_id" class="com.company.Author"/>
+        </set>
+
+        <property name = "title" column = "title" type = "string"/>
+        <property name = "isbnCode" column = "isbn_code" type = "string"/>
+
+    </class>
+
+    <class name = "com.company.Author" table = "author">
+
+        <meta attribute = "class-description">
+            This class contains the author detail.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "name" column = "name" type = "string"/>
+        <property name = "surname" column = "surname" type = "string"/>
+
+    </class>
+
+
+</hibernate-mapping>
